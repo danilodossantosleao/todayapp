@@ -1,17 +1,17 @@
 package com.example.tasktodayapp
 
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
-import android.telecom.Call.Details
+
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tasktodayapp.ui.theme.TaskTodayAppTheme
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +34,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreenContent()
+
+            MainScreenContent(DrawerState(initialValue = DrawerValue.Closed))
         }
     }
 }
@@ -47,7 +48,7 @@ fun MainScreenContent(drawerState: DrawerState) {
         scaffoldState = scaffoldState,
         topBar = {
                   TopAppBar(
-                        title = {Text (text = "TaskTodayApp")},
+                        title = { Text(text = "TaskTodayApp")},
                       navigationIcon = {
                           IconButton(onClick = {
                               CoroutineScope(Dispatchers.Default).launch {
@@ -132,7 +133,7 @@ fun  MyTaskWidget(
         taskDetails: String,
         deadEndDate: Date
     ){
-    val dateFormatter = SimpleDateFormat("EEE,MMM dd, yyyy", Locale.getDefault())
+    val dateFormatter = Locale.getDefault().toString()
     Row(modifier = modificador) {
         Icon(
             imageVector = Icons.Default.Notifications,
@@ -155,12 +156,8 @@ fun  MyTaskWidget(
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic
         )
-        Text(
-            text = taskDetails,
-            fontSize = 10.sp,
-            fontWeight = FontWeight.Normal,
-            FontStyle = FontStyle.Normal
-        )
+        Text(text = "sdfvsfv")
+
         }//colum(
     }//Row(modifier= modificador)  {
     Spacer(modifier = Modifier.height(16.dp))
@@ -169,6 +166,6 @@ fun  MyTaskWidget(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MainScreenContent()
+    MainScreenContent(DrawerState(initialValue = DrawerValue.Closed))
 
 }
